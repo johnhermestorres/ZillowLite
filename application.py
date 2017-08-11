@@ -69,13 +69,16 @@ def process_zillow_response(xml_data):
 # DATA FORMATTERS
 def format_links_section(xml_data):
     home_details    = xml_data.find("response/results/result/links/homedetails").text
-    home_details    = "Home Details Page: {0}".format(home_details)
+    home_details    = "Home Details Page;{0}".format(home_details)
+    # home_details    = "<a href={0}>Home Details Page</a>".format(home_details)
+
     graphs_and_data = xml_data.find("response/results/result/links/graphsanddata").text
-    graphs_and_data = "Chart Data Page: {0}".format(graphs_and_data)
+    graphs_and_data = "Chart Data Page;{0}".format(graphs_and_data)
     map_this_home   = xml_data.find("response/results/result/links/mapthishome").text
-    map_this_home   = "Map this Home Page: {0}".format(map_this_home)
+    map_this_home   = "Map this Home Page;{0}".format(map_this_home)
     comparables     = xml_data.find("response/results/result/links/homedetails").text
-    comparables     = "Comparables: {0}".format(comparables)
+    comparables     = "Comparables;{0}".format(comparables)
+
 
     formatted_links = [home_details, graphs_and_data, map_this_home, comparables]
     return formatted_links
@@ -90,7 +93,7 @@ def format_address_section(xml_data):
 
     line_0 = street
     line_1 = "{0}, {1} {2}".format(city, state, zipcode)
-    line_2 = "{0}, {1}".format(latitude, longitude)
+    line_2 = "Coordinates: {0}, {1}".format(latitude, longitude)
     formatted_address = [line_0, line_1, line_2]
 
     return formatted_address
@@ -116,14 +119,14 @@ def format_local_real_estate_section(xml_data):
     region_string = "Name: {0} (Type: {1}; ID: {2})".format(region_name, region_type, region_id)
 
     zindex_value = xml_data.find("response/results/result/localRealEstate/region/zindexValue").text
-    zindex_value = "Zillow Home Value Index: {0}".format(zindex_value)
+    zindex_value = "Zillow Home Value Index;{0}".format(zindex_value)
 
     region_overview_link = xml_data.find("response/results/result/localRealEstate/region/links/overview").text
-    region_overview_link = "Link to Region overview: {0}".format(region_overview_link)
+    region_overview_link = "Link to Region overview;{0}".format(region_overview_link)
     for_sale_by_owner_link = xml_data.find("response/results/result/localRealEstate/region/links/forSaleByOwner").text
-    for_sale_by_owner_link = "Link to For Sale by Owner homes page: {0}".format(for_sale_by_owner_link)
+    for_sale_by_owner_link = "Link to For Sale by Owner homes page;{0}".format(for_sale_by_owner_link)
     for_sale_link = xml_data.find("response/results/result/localRealEstate/region/links/forSale").text
-    for_sale_link = "Link to for sale homes page: {0}".format(for_sale_link)
+    for_sale_link = "Link to for sale homes page;{0}".format(for_sale_link)
 
     formatted_local_real_estate_section = [region_string,\
                                             zindex_value,\
@@ -184,5 +187,5 @@ def handle_error(error_code):
 if __name__ == "__main__":
     # Setting debug to True enables debug output. This line should be
     # removed before deploying a production app.
-    # application.debug = True
+    application.debug = True
     application.run()

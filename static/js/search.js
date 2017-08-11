@@ -49,9 +49,30 @@ $(function() {
 function jsonDataToList(jsonData) {
   var ul = $('<ul>');
   $(jsonData).each(function(index, item) {
-    ul.append(
-      $(document.createElement('li')).text(item)
-    );
+    if (item.includes("http")) {
+      // link found...format as needed
+      var htmlLink = createHtmlLink(item);
+      var li = document.createElement('li');
+      li.appendChild(htmlLink);
+      ul.append(li);
+    } else {
+      ul.append(
+        $(document.createElement('li')).text(item)
+      );      
+    }
+
   });
   return ul;
+}
+
+function createHtmlLink(linkString) {
+  // format: display_text;link
+  var splitString = linkString.split(";");
+
+  var link = document.createElement('a');
+  var linkText = document.createTextNode(splitString[0]);
+  link.appendChild(linkText);
+  link.title = splitString[0];
+  link.href = splitString[1];
+  return link;
 }
