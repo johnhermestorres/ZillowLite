@@ -74,5 +74,6 @@ function createHtmlLink(linkString) {
   link.appendChild(linkText);
   link.title = splitString[0];
   link.href = splitString[1];
+  link.target = "_blank";
   return link;
 }
