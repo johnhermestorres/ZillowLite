@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Zillow Lite Search</title>
+ 
+    
+    <link href="http://getbootstrap.com/dist/css/bootstrap.min.css" rel="stylesheet">
+ 
+    <link href="http://getbootstrap.com/examples/jumbotron-narrow/jumbotron-narrow.css" rel="stylesheet">
+    <link href="../static/search.css" rel="stylesheet">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="../static/js/search.js"></script>
+    
+  </head>
+ 
+  <body>
+    <div class="container">
+      <div class="header">
+        <h3 class="text-muted">Zillow Lite</h3>
+      </div>
+ 
+      <div class="jumbotron">
+        <h2>Address Search</h2>
+        <form class="form-signin">
+          <label for="inputAddress" class="sr-only">Address</label>
+          <input type="text" name="inputAddress" id="inputAddress" class="form-control" placeholder="Address" required autofocus>
+
+          <label for="inputCityState" class="sr-only">City, State</label>
+          <input type="text" name="inputCityState" id="inputCityState" class="form-control" placeholder="City, State" required autofocus>
+          <p>OR</p>
+          <label for="inputZip" class="sr-only">ZIP</label>
+          <input type="text" name="inputZip" id="inputZip" class="form-control" placeholder="ZIP" required>
+           
+          <button id="btnSearch" class="btn btn-lg btn-primary btn-block" type="button">Search</button>
+        </form>
+      </div>
+
+      <div id="results" style="display: none;">
+        <h3>Results</h3>
+        <h4>Zillow Links</h4>
+          <div id="linksSection"></div>
+        <h4>Address</h4>
+          <div id="addressSection"></div>
+        <h4>Zestimate</h4>
+          <div id="zestimateSection"></div>
+        <h4>Local Real Estate</h4>
+          <div id="localRealEstateSection"></div>
+      </div>
+
+      <div id="errors" style="display: none;">
+        <h3>Error Info</h3>
+        <div id="errorInfo"></div>
+      </div>
+
+      <footer class="footer">
+        <p>&copy; John Torres</p>
+      </footer>
+    </div>
+  </body>
+</html>
