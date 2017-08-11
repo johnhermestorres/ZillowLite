@@ -100,14 +100,14 @@ def format_address_section(xml_data):
 
 def format_zestimate_section(xml_data):
     amount       = xml_data.find("response/results/result/zestimate/amount").text
-    amount       = "Rent Zestimate: ${0}".format(amount)
+    amount       = "Rent Zestimate: ${0}".format("{:,}".format(int(amount)))
     last_updated = xml_data.find("response/results/result/zestimate/last-updated").text
     last_updated = "Last Updated: {0}".format(last_updated)
     value_change = xml_data.find("response/results/result/zestimate/valueChange").text
-    value_change = "30-day change: ${0}".format(value_change)
+    value_change = "30-day change: ${0}".format("{:,}".format(int(value_change)))
     value_low    = xml_data.find("response/results/result/zestimate/valuationRange/low").text
     value_high   = xml_data.find("response/results/result/zestimate/valuationRange/high").text
-    value_range  = "Value Range: ${0} to ${1}".format(value_low, value_high)
+    value_range  = "Value Range: ${0} to ${1}".format("{:,}".format(int(value_low)), "{:,}".format(int(value_high)))
 
     formatted_zestimate_section = [amount, last_updated, value_change, value_range]
     return formatted_zestimate_section
@@ -119,7 +119,7 @@ def format_local_real_estate_section(xml_data):
     region_string = "Name: {0} (Type: {1}; ID: {2})".format(region_name, region_type, region_id)
 
     zindex_value = xml_data.find("response/results/result/localRealEstate/region/zindexValue").text
-    zindex_value = "Zillow Home Value Index;{0}".format(zindex_value)
+    zindex_value = "Zillow Home Value Index: {0}".format(zindex_value)
 
     region_overview_link = xml_data.find("response/results/result/localRealEstate/region/links/overview").text
     region_overview_link = "Link to Region overview;{0}".format(region_overview_link)
@@ -187,5 +187,5 @@ def handle_error(error_code):
 if __name__ == "__main__":
     # Setting debug to True enables debug output. This line should be
     # removed before deploying a production app.
-    application.debug = True
+    # application.debug = True
     application.run()
